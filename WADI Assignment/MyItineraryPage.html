@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+<html ng-app="itsApp">
+
+<body ng-controller="itineraryController">
+    <h1>My itinerary page</h1>
+    <div ng-show="!isEditing">
+        <button ng-click="beginEditing()">Add new itinerary</button>
+        <form>
+            <p>Search for itineraries <input type="text" ng-model="search"></p>
+        </form>
+        <p>
+            Here are your current itineraries
+
+            <table>
+                <tr>
+                    <th>Current Passenger</th>
+                    <th>Drop Off Location</th>
+                    <th>Passenger Name</th>
+                    <th>Pickup Location</th>
+                    <th>Vehicle Id</th>
+                </tr>
+                <tr ng-repeat="itinerary in itineraries | filter:search">
+                    <td>{{itinerary.CurrentPassengers}}</td>
+                    <td>{{itinerary.DropOffLocation}}</td>
+                    <td>{{itinerary.PassengerName}}</td>
+                    <td>{{itinerary.PickupLocation}}</td>
+                    <td>{{itinerary.VehicleId}}</td>
+                    <td><a href="" ng-click="remove(itinerary)">remove</a></td>
+                </tr>
+            </table>
+        </p>
+    </div>
+    <div ng-show="isEditing">
+        <h2>Add Itinerary</h2>
+        <label>Itinerary Name: <input ng-model="itiName" /></label><br />
+        <label>Destination: <input ng-model="destination" /></label><br />
+        <label>Purpose: <input ng-model="purpose" /></label><br />
+        <label>Start Date: <input ng-model="startDate" /></label><br />
+        <label>End Date: <input ng-model="endDate" /></label><br />
+        <button ng-click="add()">Add</button>
+        <button ng-click="cancelAddition()">Cancel</button>
+    </div>
+
+
+    <script src="app/myApp.js"></script>
+    <script src="app/itinerary/itineraryModule.js"></script>
+    <script src="app/itinerary/itineraryController.js"></script>
+
+</body>
+</html>
